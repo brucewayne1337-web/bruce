@@ -3,6 +3,7 @@ import { getClient } from '../lib/sanityClient.js'
 const fallback = {
   brandName: 'brucewaynee',
   brandUrl: 'https://brucewaynee.com',
+  studioUrl: '',
   heroTitle: 'brucewaynee',
   heroSubtitle: 'A fast, clean, mobile-first game discovery portal. Informational only—18+; we do not operate or host games.',
   primaryCtaLabel: 'Browse Games',
@@ -18,7 +19,7 @@ export async function getSettings() {
   if (!client) return fallback
   try {
     const doc = await client.fetch(`*[_type == "siteSettings"][0]{
-      brandName, brandUrl,
+      brandName, brandUrl, studioUrl,
       heroTitle, heroSubtitle,
       primaryCtaLabel, primaryCtaHref,
       secondaryCtaLabel, secondaryCtaHref,
