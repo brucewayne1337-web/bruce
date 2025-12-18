@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css'
-import { getSettings } from '../data/settings.sanity.js'
-const settings = await getSettings()
+const brandName = 'brucewaynee'
+const brandUrl = 'https://brucewaynee.com'
+const disclaimer1 = 'Informational gaming portal – 18+ only. We do not operate or host games.'
+const disclaimer2 = 'All game links are external. Visiting a game will open a new tab. No payments or accounts are handled on this site.'
 const { title = 'Gaming Portal', description = 'Informational gaming discovery portal – 18+ only' } = Astro.props
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.href
 ---
@@ -25,16 +27,14 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : As
     <header class="border-b border-white/10">
       <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
         <a href="/" class="flex items-center gap-2">
-          <span class="text-xl font-bold accent-neon">{settings.brandName}</span>
+          <span class="text-xl font-bold accent-neon">{brandName}</span>
         </a>
         <nav class="flex items-center gap-6 text-sm">
           <a href="/" class="text-white/80 hover:text-gold">Home</a>
           <a href="/games" class="text-white/80 hover:text-gold">Games</a>
           <a href="/about" class="text-white/80 hover:text-gold">About</a>
           <a href="/responsible" class="text-white/80 hover:text-gold">Responsible</a>
-          {settings.studioUrl && (
-            <a href={settings.studioUrl} target="_blank" rel="nofollow noopener" class="text-white/60 hover:text-gold">CMS</a>
-          )}
+          <a href="/contact" class="text-white/80 hover:text-gold">Contact</a>
         </nav>
       </div>
     </header>
@@ -45,9 +45,9 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : As
 
     <footer class="mt-10 border-t border-white/10">
       <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-white/70 space-y-2">
-        <p>{settings.footerDisclaimer1}</p>
-        <p>{settings.footerDisclaimer2}</p>
-        <p>© {new Date().getFullYear()} <a href={settings.brandUrl} target="_blank" rel="nofollow noopener" class="text-gold hover:text-gold-soft">{settings.brandName}</a>. Trust-first discovery.</p>
+        <p>{disclaimer1}</p>
+        <p>{disclaimer2}</p>
+        <p>© {new Date().getFullYear()} <a href={brandUrl} target="_blank" rel="nofollow noopener" class="text-gold hover:text-gold-soft">{brandName}</a>. Trust-first discovery.</p>
       </div>
     </footer>
   </body>

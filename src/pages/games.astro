@@ -1,12 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import GameCard from '../components/GameCard.astro'
-import { getGames } from '../data/games.sanity.js'
-import { getSettings } from '../data/settings.sanity.js'
-const games = await getGames()
-const settings = await getSettings()
+
+import { games } from '../data/games.js'
 ---
-<BaseLayout title={`Games – ${settings.brandName}`} description="Browse a curated list of game portals. All links external.">
+<BaseLayout title={`Games – brucewaynee`} description="Browse a curated list of game portals. All links external.">
   <section>
     <div class="flex items-end justify-between">
       <div>

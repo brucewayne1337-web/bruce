@@ -1,15 +1,10 @@
 ---
-import { faviconUrlFor } from '../lib/favicon.js'
-const { name, tagline, icon, url } = Astro.props
-const favicon = faviconUrlFor(url)
+const { key, name, tagline, icon, url, logo } = Astro.props
 ---
 <article class="card card-hover p-5 flex flex-col gap-4" aria-label={`${name} card`}>
   <div class="flex items-center gap-3">
-    {favicon ? (
-      <img src={favicon} alt={`${name} logo`} width="24" height="24" class="rounded-sm shadow-sm" loading="lazy" />
-    ) : (
-      <div class="text-2xl" aria-hidden="true">{icon}</div>
-    )}
+    <img id={`logo-${key}`} data-key={key} alt={`${name} logo`} width="24" height="24" class="rounded-sm shadow-sm" loading="lazy" style="display:none" />
+    <div class="text-2xl" aria-hidden="true">{icon}</div>
     <h3 class="text-lg font-semibold tracking-wide">{name}</h3>
   </div>
   <p class="text-sm text-white/70">{tagline}</p>
@@ -26,3 +21,31 @@ const favicon = faviconUrlFor(url)
     </a>
   </div>
 </article>
+
+<script>
+  (function(){
+    const key = "${key}"
+    const specified = "${logo || ''}"
+    const img = document.getElementById(`logo-${key}`)
+    const fallback = img?.nextElementSibling
+    const exts = ['png','jpg','jpeg','webp','svg']
+    const base = `/images/${key}.`
+    const tryLoad = (url) => new Promise((resolve) => {
+      const probe = new Image()
+      probe.onload = () => { if (img) { img.src = url; img.style.display = 'inline-block' } resolve(true) }
+      probe.onerror = () => resolve(false)
+      probe.src = url
+    })
+    (async () => {
+      const candidates = []
+      if (specified) candidates.push(`/images/${specified}`)
+      for (const ext of exts) candidates.push(base + ext)
+      for (const url of candidates) {
+        const ok = await tryLoad(url)
+        if (ok) return
+      }
+      if (img) img.style.display = 'none'
+      if (fallback) fallback.style.display = ''
+    })()
+  })()
+</script>
