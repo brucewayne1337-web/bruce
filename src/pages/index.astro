@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import GameCard from '../components/GameCard.astro'
+import { getGames } from '../data/games.sanity.js'
+import { getSettings } from '../data/settings.sanity.js'
+const settings = await getSettings()
+const allGames = await getGames()
+const featured = allGames.slice(0, 4)
+---
+<BaseLayout title={`${settings.brandName} – Play & Explore`} description="Informational gaming portal – 18+ only. Explore and visit external games." >
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-gold/10 blur-3xl"></div>
+      <div class="absolute -bottom-10 -right-10 w-80 h-80 rounded-full bg-neon/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">
+        <span class="accent-neon">{settings.heroTitle}</span>
+      </h1>
+      <p class="mt-3 text-white/80 max-w-2xl">{settings.heroSubtitle}</p>
+      <div class="mt-6 flex gap-3">
+        <a href={settings.primaryCtaHref} class="btn-primary">{settings.primaryCtaLabel}</a>
+        <a href={settings.secondaryCtaHref} class="inline-flex items-center justify-center rounded-md px-4 py-2 font-medium border border-white/20 text-white hover:border-gold transition">
+          {settings.secondaryCtaLabel}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-semibold">Featured Games</h2>
+      <a href="/games" class="text-sm text-gold hover:text-gold-soft">View all</a>
+    </div>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {featured.map((g) => (
+        <GameCard {...g} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

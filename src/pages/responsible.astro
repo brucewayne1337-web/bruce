@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getSettings } from '../data/settings.sanity.js'
+const settings = await getSettings()
+---
+<BaseLayout title={`Responsible Gaming – ${settings.brandName}`} description="18+ only. Practice responsible play. This portal does not host or operate games.">
+  <section class="space-y-6">
+    <h1 class="text-2xl font-bold">Responsible Gaming</h1>
+    <p class="text-white/80 max-w-3xl">This is an informational portal for adults (18+). Play responsibly and take breaks. We do not host or operate any games.</p>
+
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="card p-5">
+        <h2 class="font-semibold text-lg">Guidelines</h2>
+        <ul class="mt-2 text-sm text-white/70 list-disc list-inside space-y-1">
+          <li>Set time limits and stick to them</li>
+          <li>Never share personal or sensitive information</li>
+          <li>Use strong device security and trusted networks</li>
+          <li>If play stops being fun, step away</li>
+        </ul>
+      </div>
+      <div class="card p-5">
+        <h2 class="font-semibold text-lg">External Resources</h2>
+        <p class="text-sm text-white/70 mt-2">Find more information on healthy digital habits from reputable organizations and local guidance.</p>
+      </div>
+    </div>
+
+    <div class="card p-5">
+      <h2 class="font-semibold text-lg">Legal & Hosting Notice</h2>
+      <p class="text-sm text-white/70 mt-2">We do not manage payments, accounts, or gameplay. All titles listed are third-party experiences accessed via external links set to open in new tabs.</p>
+    </div>
+  </section>
+</BaseLayout>

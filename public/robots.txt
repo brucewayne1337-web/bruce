@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brucewaynee.com/sitemap-index.xml

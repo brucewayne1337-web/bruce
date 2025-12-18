@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import GameCard from '../components/GameCard.astro'
+import { getGames } from '../data/games.sanity.js'
+import { getSettings } from '../data/settings.sanity.js'
+const games = await getGames()
+const settings = await getSettings()
+---
+<BaseLayout title={`Games – ${settings.brandName}`} description="Browse a curated list of game portals. All links external.">
+  <section>
+    <div class="flex items-end justify-between">
+      <div>
+        <h1 class="text-2xl font-bold">Games</h1>
+        <p class="text-sm text-white/70 mt-1">Explore and visit games. Neutral language, no payments here.</p>
+      </div>
+      <div class="text-xs text-white/50">All links open in new tabs.</div>
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {games.map((g) => (
+        <GameCard {...g} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

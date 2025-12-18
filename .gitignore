@@ -1,0 +1,19 @@
+node_modules
+dist
+.astro
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env & local config
+.env
+.env.*
+.env.local
+
+# VS Code
+.vscode/
+
+# Mac / system
+Thumbs.db

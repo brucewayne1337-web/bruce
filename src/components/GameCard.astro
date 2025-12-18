@@ -1,0 +1,22 @@
+---
+const { name, tagline, icon, url } = Astro.props
+---
+<article class="card card-hover p-5 flex flex-col gap-4" aria-label={`${name} card`}>
+  <div class="flex items-center gap-3">
+    <div class="text-2xl" aria-hidden="true">{icon}</div>
+    <h3 class="text-lg font-semibold tracking-wide">{name}</h3>
+  </div>
+  <p class="text-sm text-white/70">{tagline}</p>
+
+  <div class="mt-auto">
+    <a
+      class="btn-primary w-full"
+      href={url}
+      target="_blank"
+      rel="nofollow noopener"
+      aria-label={`Visit ${name} (opens in new tab)`}
+    >
+      Visit Game
+    </a>
+  </div>
+</article>
